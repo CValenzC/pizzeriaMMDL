@@ -1,15 +1,19 @@
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import Home from "./pages/Home";
+import Navbar from "./components/Navbar"
+import Footer from "./components/Footer"
+import RegisterPage from "./components/RegisterPage"
+import LoginPage from "./components/LoginPage"
+// import Home from "./components/Home" aqui irá cuando se haga funcionar el link
 
-function App() {
+const App = () => {
   return (
     <div>
       <Navbar />
-      <Home />
+      {/* <Home /> */}
+      {/* <RegisterPage /> */}
+      <LoginPage />
       <Footer />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
