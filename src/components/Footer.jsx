@@ -4,7 +4,7 @@ const Footer = () => {
         <p>© 2025 - Pizzería Mamma Mia! - Todos los derechos reservados</p>
         <p>by CTVC</p>
       </footer>
-    );
-  };
+    )
+  }
   
-  export default Footer;  
+  export default Footer; 
