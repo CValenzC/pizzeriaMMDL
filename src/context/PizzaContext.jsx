@@ -1,11 +1,16 @@
 import { createContext, useState } from "react"
 import { pizzas } from "../data/pizzas"
+import { pizzaCart as initialCart } from "../data/pizzas" // Importamos el carrito inicial
 
 export const PizzaContext = createContext()
 
+console.log("PizzaContext cargado correctamente")
+
 export const PizzaProvider = ({ children }) => {
-  const [pizzaCart, setPizzaCart] = useState([])
-  
+  const [pizzaCart, setPizzaCart] = useState(
+    initialCart.map((p) => ({ ...p, quantity: p.count })) // Convertimos count a quantity
+  )
+
   const addToCart = (pizza) => {
     setPizzaCart((prevCart) => {
       const existingPizza = prevCart.find((p) => p.id === pizza.id)

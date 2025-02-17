@@ -1,5 +1,8 @@
+import { useContext } from "react"
+import { PizzaContext } from "../context/PizzaContext"
+
 const Navbar = () => {
-  const total = 25000
+  const { total } = useContext(PizzaContext) // Obtenemos el total del contexto
   const token = false
 
   return (
