@@ -4,6 +4,7 @@ Proyecto Pizzeria Mamma Mía
 
 >> - Se han agregado los componentes RegisterPage y LoginPage para manejar estos eventos
 >> - Se han modificado los valores de montos para que se muestren en formato de moneda local
+>> - Se han agregado manejadores de Status y Context para obtener y renderizar data desde .js en los componentes Cards y Cart además de el Total en Navbar
 
 Desarrollado en React y ejecutado con Vite, para ejecutar:
 
