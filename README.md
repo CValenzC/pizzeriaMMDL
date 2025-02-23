@@ -1,10 +1,10 @@
 # React + Vite
 
-Proyecto Pizzeria Mamma Mía
+Proyecto Pizzeria Mamma Mía (Entrega 4)
 
->> - Se han agregado los componentes RegisterPage y LoginPage para manejar estos eventos
->> - Se han modificado los valores de montos para que se muestren en formato de moneda local
->> - Se han agregado manejadores de Status y Context para obtener y renderizar data desde .js en los componentes Cards y Cart además de el Total en Navbar
+>> - Se ha agregado el componente Pizza, utilizando fetch y useEffect para traer la info de la API Pizzas
+>> - Se han modificado los metodos de renderizado de las Cards de pizzas para añadir a li
+>> - Se deben comentar y des-comentar los componentes Home y Pizza para probar las páginas.
 
 Desarrollado en React y ejecutado con Vite, para ejecutar:
 

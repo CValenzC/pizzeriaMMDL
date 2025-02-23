@@ -6,7 +6,7 @@ import App from "./App"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    {/* <PizzaProvider> ENVUELVE App CON PizzaProvider */}
+    {/* <PizzaProvider> Se elimina el uso de Provider por ahora */}
       <App />
     {/* </PizzaProvider> */}
   </React.StrictMode>
