@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react'
-import CardPizza from './CardPizza'
+import React, { useState, useEffect } from "react"
+import CardPizza from "./CardPizza"
 
 const Home = () => {
-  const [pizzas, setPizzas] = useState([]) // Estado para almacenar las pizzas
-  const [loading, setLoading] = useState(true) // Estado para manejar el loading
-  const [error, setError] = useState(null) // Estado para manejar errores
+  const [pizzas, setPizzas] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  // Consumir la API de pizzas
   useEffect(() => {
     const fetchPizzas = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/pizzas')
+        const response = await fetch("http://localhost:5000/api/pizzas")
         if (!response.ok) {
-          throw new Error('Error al obtener las pizzas')
+          throw new Error("Error al obtener las pizzas")
         }
         const data = await response.json()
+        console.log("Datos de la API:", data)
         setPizzas(data)
       } catch (error) {
         setError(error.message)
@@ -24,15 +24,10 @@ const Home = () => {
     }
 
     fetchPizzas()
-  }, []) // El array vacío asegura que solo se ejecute una vez al montar el componente
+  }, [])
 
-  if (loading) {
-    return <p>Cargando pizzas...</p>
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>
-  }
+  if (loading) return <p>Cargando pizzas...</p>
+  if (error) return <p>Error: {error}</p>
 
   return (
     <div className="container">
@@ -40,6 +35,7 @@ const Home = () => {
         {pizzas.map((pizza) => (
           <CardPizza
             key={pizza.id}
+            id={pizza.id}
             name={pizza.name}
             price={pizza.price}
             ingredients={pizza.ingredients}
