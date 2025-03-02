@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 
-const Pizza = ({ id }) => { // Recibe el ID como prop
+const Pizza = () => {
   const [pizza, setPizza] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -8,7 +8,7 @@ const Pizza = ({ id }) => { // Recibe el ID como prop
   useEffect(() => {
     const fetchPizza = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/pizzas/${id}`)
+        const response = await fetch("http://localhost:5000/api/pizzas/p001") // Siempre obtiene p001
         if (!response.ok) {
           throw new Error("Error al obtener los detalles de la pizza")
         }
@@ -22,7 +22,7 @@ const Pizza = ({ id }) => { // Recibe el ID como prop
     }
 
     fetchPizza()
-  }, [id]) // Dependencia: id
+  }, [])
 
   if (loading) return <p>Cargando detalles de la pizza...</p>
   if (error) return <p>Error: {error}</p>

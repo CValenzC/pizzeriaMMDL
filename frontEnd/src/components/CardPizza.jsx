@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const CardPizza = ({ name, price, ingredients, img }) => {
     return (
         <div className="col-md-4 mb-4">
@@ -13,7 +15,7 @@ const CardPizza = ({ name, price, ingredients, img }) => {
                         ))}
                     </ul>
                     <div className="mt-auto"> 
-                        <button className="btn btn-primary">Ver más</button>
+                        <Link to="/pizza/p001" className="btn btn-primary">Ver detalles</Link>
                         <button className="btn btn-success mx-2">Añadir</button>
                     </div>
                 </div>

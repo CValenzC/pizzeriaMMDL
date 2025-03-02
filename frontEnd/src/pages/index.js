@@ -1,0 +1,7 @@
+export { default as Home } from "./Home"
+export { default as Register } from "./RegisterPage"
+export { default as Login } from "./LoginPage"
+export { default as Cart } from "./Cart"
+export { default as Pizza } from "./Pizza"
+export { default as Profile } from "./Profile"
+export { default as NotFound } from "./NotFound"

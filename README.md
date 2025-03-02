@@ -1,10 +1,10 @@
 # React + Vite
 
-Proyecto Pizzeria Mamma Mía (Entrega 4)
+Proyecto Pizzeria Mamma Mía (Entrega 5)
 
->> - Se ha agregado el componente Pizza, utilizando fetch y useEffect para traer la info de la API Pizzas
->> - Se han modificado los metodos de renderizado de las Cards de pizzas para añadir a li
->> - Se deben comentar y des-comentar los componentes Home y Pizza para probar las páginas.
+>> - Se ha agregado el componente Profile
+>> - Se han modificado los metodos de enrutamiento con Router-dom
+>> - Se agrega página Not Found 404 (debe ser enrutada en el navegador como /404)
 
 Desarrollado en React y ejecutado con Vite, para ejecutar:
 

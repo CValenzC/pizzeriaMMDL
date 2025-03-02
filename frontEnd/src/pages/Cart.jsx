@@ -1,8 +1,9 @@
-import { useContext } from "react"
-import { PizzaContext } from "../context/PizzaContext"
+import React from "react"
+import { pizzaCart } from "../data/pizzas" 
 
 const Cart = () => {
-  const { pizzaCart, increaseQuantity, decreaseQuantity, total } = useContext(PizzaContext)
+  // Calcular el total del carrito
+  const total = pizzaCart.reduce((acc, item) => acc + item.price * item.count, 0)
 
   return (
     <div className="container">
@@ -16,12 +17,9 @@ const Cart = () => {
               <div>
                 <h5>{pizza.name}</h5>
                 <p>Precio: ${pizza.price.toLocaleString("es-CL")}</p>
-                <p>Cantidad: {pizza.quantity}</p>
+                <p>Cantidad: {pizza.count}</p>
               </div>
-              <div>
-                <button className="btn btn-sm btn-success mx-2" onClick={() => increaseQuantity(pizza.id)}>+</button>
-                <button className="btn btn-sm btn-danger" onClick={() => decreaseQuantity(pizza.id)}>-</button>
-              </div>
+              <img src={pizza.img} alt={pizza.name} style={{ width: "100px", height: "auto" }} /> {/* Muestra la imagen */}
             </li>
           ))}
         </ul>
