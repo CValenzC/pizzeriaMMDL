@@ -1,50 +1,49 @@
-import { createContext, useState } from "react"
-import { pizzas } from "../data/pizzas"
-import { pizzaCart as initialCart } from "../data/pizzas" // Importamos el carrito inicial
-
+import { createContext, useState, useEffect } from "react"
 export const PizzaContext = createContext()
 
-console.log("PizzaContext cargado correctamente")
 
-export const PizzaProvider = ({ children }) => {
-  const [pizzaCart, setPizzaCart] = useState(
-    initialCart.map((p) => ({ ...p, quantity: p.count })) // Convertimos count a quantity
-  )
+export const PizzaProvider = ({ children }) => {// Proveedor del contexto Pizzas
+  const [pizzas, setPizzas] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  const addToCart = (pizza) => {
-    setPizzaCart((prevCart) => {
-      const existingPizza = prevCart.find((p) => p.id === pizza.id)
-      if (existingPizza) {
-        return prevCart.map((p) =>
-          p.id === pizza.id ? { ...p, quantity: p.quantity + 1 } : p
-        )
+  // Obtener todas las pizzas desde la API
+  useEffect(() => {
+    const fetchPizzas = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/pizzas")
+        if (!response.ok) {
+          throw new Error("Error al obtener las pizzas")
+        }
+        const data = await response.json()
+        setPizzas(data)
+      } catch (error) {
+        setError(error.message)
+      } finally {
+        setLoading(false)
       }
-      return [...prevCart, { ...pizza, quantity: 1 }]
-    })
-  }
+    }
 
-  const increaseQuantity = (id) => {
-    setPizzaCart((prevCart) =>
-      prevCart.map((p) =>
-        p.id === id ? { ...p, quantity: p.quantity + 1 } : p
-      )
-    )
-  }
+    fetchPizzas()
+  }, [])
 
-  const decreaseQuantity = (id) => {
-    setPizzaCart((prevCart) =>
-      prevCart
-        .map((p) =>
-          p.id === id ? { ...p, quantity: p.quantity - 1 } : p
-        )
-        .filter((p) => p.quantity > 0) // Eliminar si la cantidad llega a 0
-    )
+  // Obtener una pizza consultando por su ID
+  const getPizzaById = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/pizzas/${id}`)
+      if (!response.ok) {
+        throw new Error("Error al obtener los detalles de la pizza")
+      }
+      const data = await response.json()
+      return data
+    } catch (error) {
+      setError(error.message)
+      return null
+    }
   }
-
-  const total = pizzaCart.reduce((acc, p) => acc + p.price * p.quantity, 0)
 
   return (
-    <PizzaContext.Provider value={{ pizzas, pizzaCart, addToCart, increaseQuantity, decreaseQuantity, total }}>
+    <PizzaContext.Provider value={{ pizzas, loading, error, getPizzaById }}>
       {children}
     </PizzaContext.Provider>
   )

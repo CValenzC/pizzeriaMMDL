@@ -1,10 +1,11 @@
 import { Navbar, Nav, Container, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useContext } from 'react'
+import { CartContext } from '../context/CartContext'
 
 const Navb = () => {
-  const [total, setTotal] = useState(0)
-  const token = false
+  const { total } = useContext(CartContext)
+  const token = true
 
   return (
     <Navbar bg='dark' variant='dark' expand='lg'>
@@ -23,16 +24,15 @@ const Navb = () => {
               </>
             ) : (
               <>
-                <Button variant='outline-light' as={Link} to='/profile' className='mx-2'>🔓 Profile</Button>
+                <Button variant='outline-light' as={Link} to='/profile' className='mx-2'>👤 Profile</Button>
                 <Button variant='danger'>🔒 Logout</Button>
               </>
             )}
-            <Button variant='outline-light' as={Link} to='/Profile'>👤 Perfil</Button>
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  );
-};
+  )
+}
 
 export default Navb

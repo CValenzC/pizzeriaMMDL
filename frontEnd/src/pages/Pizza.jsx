@@ -1,32 +1,22 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
+import { useParams } from "react-router-dom"
+import { PizzaContext } from "../context/PizzaContext"
 
 const Pizza = () => {
+  const { id } = useParams()
   const [pizza, setPizza] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const { getPizzaById } = useContext(PizzaContext)
 
   useEffect(() => {
     const fetchPizza = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/api/pizzas/p001") // Siempre obtiene p001
-        if (!response.ok) {
-          throw new Error("Error al obtener los detalles de la pizza")
-        }
-        const data = await response.json()
-        setPizza(data)
-      } catch (error) {
-        setError(error.message)
-      } finally {
-        setLoading(false)
-      }
+      const data = await getPizzaById(id)
+      setPizza(data)
     }
 
     fetchPizza()
-  }, [])
+  }, [id, getPizzaById])
 
-  if (loading) return <p>Cargando detalles de la pizza...</p>
-  if (error) return <p>Error: {error}</p>
-  if (!pizza) return <p>No se encontró la pizza</p>
+  if (!pizza) return <p>Cargando detalles de la pizza...</p>
 
   return (
     <div className="container mt-4">

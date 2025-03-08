@@ -1,9 +1,8 @@
-import React from "react"
-import { pizzaCart } from "../data/pizzas" 
+import { useContext } from "react"
+import { CartContext } from "../context/CartContext" // Importa el contexto
 
 const Cart = () => {
-  // Calcular el total del carrito
-  const total = pizzaCart.reduce((acc, item) => acc + item.price * item.count, 0)
+  const { pizzaCart, increaseQuantity, decreaseQuantity, total } = useContext(CartContext)
 
   return (
     <div className="container">
@@ -17,9 +16,12 @@ const Cart = () => {
               <div>
                 <h5>{pizza.name}</h5>
                 <p>Precio: ${pizza.price.toLocaleString("es-CL")}</p>
-                <p>Cantidad: {pizza.count}</p>
+                <p>Cantidad: {pizza.quantity}</p>
               </div>
-              <img src={pizza.img} alt={pizza.name} style={{ width: "100px", height: "auto" }} /> {/* Muestra la imagen */}
+              <div>
+                <button className="btn btn-sm btn-success mx-2" onClick={() => increaseQuantity(pizza.id)}>+</button>
+                <button className="btn btn-sm btn-danger" onClick={() => decreaseQuantity(pizza.id)}>-</button>
+              </div>
             </li>
           ))}
         </ul>
