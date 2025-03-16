@@ -10,7 +10,7 @@ const CardPizza = ({ id, name, price, ingredients, img }) => {
       <div className="card h-100">
         <img src={img} className="card-img-top" alt={name} />
         <div className="card-body d-flex flex-column">
-          <h5 className="card-title">{name}</h5>
+          <h5 className="card-title">Pizza {name}</h5>
           <p className="card-text">Precio: ${price.toLocaleString("es-CL")}</p>
           <p className="card-text">Ingredientes:</p>
           <ul>

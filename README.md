@@ -1,10 +1,10 @@
 # React + Vite
 
-Proyecto Pizzeria Mamma Mía (Entrega 6)
+Proyecto Pizzeria Mamma Mía (Entrega 7)
 
->> - Se ha modificado el componente Nav para manejar profile variant y el carrito con contexto
->> - Se ha agregado PizzaContext y CartContext al proyecto para manejar globalmente esta data
->> - Se modifican las llamadas de ruta de las pizzas con id de manera dinámica haciendo uso de contexto
+>> - Se ha agregado UserContext para manejar el token de sesión
+>> - Se ha modificado el componente Nav para manejar UserContext
+>> - Se modifican las validaciones de rutas y botones según el login ingresado
 
 Desarrollado en React y ejecutado con Vite, para ejecutar:
 

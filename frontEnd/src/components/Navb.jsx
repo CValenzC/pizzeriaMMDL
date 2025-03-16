@@ -2,10 +2,11 @@ import { Navbar, Nav, Container, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 import { CartContext } from '../context/CartContext'
+import { useUser } from '../context/UserContext'
 
 const Navb = () => {
   const { total } = useContext(CartContext)
-  const token = true
+  const { token, logout } = useUser()
 
   return (
     <Navbar bg='dark' variant='dark' expand='lg'>
@@ -25,7 +26,7 @@ const Navb = () => {
             ) : (
               <>
                 <Button variant='outline-light' as={Link} to='/profile' className='mx-2'>👤 Profile</Button>
-                <Button variant='danger'>🔒 Logout</Button>
+                <Button variant='danger' onClick={logout}>🔒 Logout</Button>
               </>
             )}
           </Nav>

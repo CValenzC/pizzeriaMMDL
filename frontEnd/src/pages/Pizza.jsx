@@ -25,7 +25,7 @@ const Pizza = () => {
           <img src={pizza.img} alt={pizza.name} className="img-fluid" />
         </div>
         <div className="col-md-6">
-          <h2>{pizza.name}</h2>
+          <h2>Pizza {pizza.name}</h2>
           <p>Precio: ${pizza.price.toLocaleString("es-CL")}</p>
           <p>Ingredientes:</p>
           <ul>
