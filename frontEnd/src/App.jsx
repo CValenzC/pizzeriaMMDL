@@ -1,5 +1,5 @@
 import "./App.css"
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
+import { Routes, Route, Navigate } from "react-router-dom"
 import { Home, Register, Login, Cart, Pizza, Profile, NotFound } from "./pages"
 import Navb from "./components/Navb"
 import Footer from "./components/Footer"
@@ -9,14 +9,13 @@ const App = () => {
   const { token } = useUser()
 
   return (
-    <Router>
       <div className="d-flex flex-column min-vh-100">
         <Navb total={0} />
         <div className="flex-grow-1">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={!token ? <Register /> : <Navigate to="/profile" />} />
-            <Route path="/login" element={!token ? <Login /> : <Navigate to="/profile" />} />
+            <Route path="/login" element={!token ? <Login /> : <Navigate to="/" />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/pizza/:id" element={<Pizza />} />
             <Route path="/profile" element={token ? <Profile /> : <Navigate to="/login" />} />
@@ -26,7 +25,6 @@ const App = () => {
         </div>
         <Footer />
       </div>
-    </Router>
   )
 }
 

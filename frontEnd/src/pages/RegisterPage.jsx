@@ -1,41 +1,31 @@
-import { useState } from "react"
-import { Alert } from "react-bootstrap"
+// pages/RegisterPage.jsx
+import { useState } from 'react'
+import { Alert } from 'react-bootstrap'
+import { useUser } from '../context/UserContext'
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
+    email: '',
+    password: '',
+    confirmPassword: '',
   })
-
-  const [message, setMessage] = useState({ text: "", type: "" })
+  const [message, setMessage] = useState({ text: '', type: '' })
+  const { register } = useUser()
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-
-    if (!formData.email || !formData.password || !formData.confirmPassword) {
-      setMessage({ text: "Todos los campos son obligatorios", type: "danger" })
-      return
-    }
-
-    if (formData.password.length < 6) {
-      setMessage({ text: "La contraseña debe tener al menos 6 caracteres", type: "danger" })
-      return
-    }
-
     if (formData.password !== formData.confirmPassword) {
-      setMessage({ text: "Las contraseñas no coinciden", type: "danger" })
+      setMessage({ text: 'Las contraseñas no coinciden', type: 'danger' })
       return
     }
-
-    setMessage({ text: "Registro exitoso 🎉", type: "success" })
+    const result = await register(formData.email, formData.password)
+    if (!result.success) {
+      setMessage({ text: result.message, type: 'danger' })
+    }
   }
 
   return (

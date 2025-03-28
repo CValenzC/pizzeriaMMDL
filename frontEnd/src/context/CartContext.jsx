@@ -1,11 +1,15 @@
-import { createContext, useState } from "react"
+import { createContext, useState, useContext } from "react"
 export const CartContext = createContext()
 
+export const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) throw new Error("useCart debe usarse dentro de un CartProvider")
+  return context
+}
 
-export const CartProvider = ({ children }) => {// Proveedor del contexto
+export const CartProvider = ({ children }) => {
   const [pizzaCart, setPizzaCart] = useState([])
 
-  // Agregar una pizza al carrito
   const addToCart = (pizza) => {
     setPizzaCart((prevCart) => {
       const existingPizza = prevCart.find((p) => p.id === pizza.id)
@@ -18,7 +22,6 @@ export const CartProvider = ({ children }) => {// Proveedor del contexto
     })
   }
 
-  // Aumentar cantidad en el carrito
   const increaseQuantity = (id) => {
     setPizzaCart((prevCart) =>
       prevCart.map((p) =>
@@ -27,23 +30,32 @@ export const CartProvider = ({ children }) => {// Proveedor del contexto
     )
   }
 
-  // Disminuir cantidad en el carrito
   const decreaseQuantity = (id) => {
     setPizzaCart((prevCart) =>
       prevCart
         .map((p) =>
           p.id === id ? { ...p, quantity: p.quantity - 1 } : p
         )
-        .filter((p) => p.quantity > 0) // Eliminar si la cantidad llega a 0
+        .filter((p) => p.quantity > 0)
     )
   }
 
-  // Calcular el total del carrito
+  const clearCart = () => {
+    setPizzaCart([])
+  }
+
   const total = pizzaCart.reduce((acc, p) => acc + p.price * p.quantity, 0)
 
   return (
     <CartContext.Provider
-      value={{ pizzaCart, addToCart, increaseQuantity, decreaseQuantity, total }}
+      value={{ 
+        pizzaCart, 
+        addToCart, 
+        increaseQuantity, 
+        decreaseQuantity, 
+        total,
+        clearCart
+      }}
     >
       {children}
     </CartContext.Provider>

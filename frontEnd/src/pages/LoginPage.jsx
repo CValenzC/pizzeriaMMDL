@@ -1,35 +1,27 @@
-import { useState } from "react"
-import { Alert } from "react-bootstrap"
+// pages/LoginPage.jsx
+import { useState } from 'react'
+import { Alert } from 'react-bootstrap'
+import { useUser } from '../context/UserContext'
 
 const LoginPage = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  })
-
-  const [message, setMessage] = useState({ text: "", type: "" })
+  const [formData, setFormData] = useState({ email: '', password: '' })
+  const [message, setMessage] = useState({ text: '', type: '' })
+  const { login } = useUser()
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (!formData.email || !formData.password) {
-      setMessage({ text: "Todos los campos son obligatorios", type: "danger" })
+      setMessage({ text: 'Todos los campos son obligatorios', type: 'danger' })
       return
     }
-
-    if (formData.password.length < 6) {
-      setMessage({ text: "La contraseña debe tener al menos 6 caracteres", type: "danger" })
-      return;
+    const result = await login(formData.email, formData.password)
+    if (!result.success) {
+      setMessage({ text: result.message, type: 'danger' })
     }
-
-    setMessage({ text: "Inicio de sesión exitoso ✅", type: "success" })
   }
 
   return (
